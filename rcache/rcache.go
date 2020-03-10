@@ -65,8 +65,8 @@ func (c *Rcache) Add(key string, value valtype) {
 }
 
 func (c *Rcache) Get(key string) (valtype, bool) {
-	c.mu.Lock()
-	defer c.mu.Unlock()
+	//c.mu.Lock()
+	//defer c.mu.Unlock()
 	val, ok := c.Values[key]
 	return val, ok
 }
