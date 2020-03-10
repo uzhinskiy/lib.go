@@ -5,6 +5,6 @@
 
     cache := rcache.New("mycache", 10)
     cache.Lock()
-    cache.Add("key_name", []byte("value")
+    cache.Add("key_name", []byte("value"))
     cache.Unlock()
 
