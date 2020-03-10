@@ -56,7 +56,11 @@ func (c *Rcache) Add(key string, value valtype) {
 		c.deloldest()
 	}
 	// TODO: сделать проверку на дубликаты ключей
-	c.keys = append(c.keys, key)
+
+	_, present := c.Values[key]
+	if !present {
+		c.keys = append(c.keys, key)
+	}
 	c.Values[key] = value
 	c.clen++
 }
