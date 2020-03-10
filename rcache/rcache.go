@@ -26,7 +26,6 @@ const (
 type valtype []byte
 
 type Rcache struct {
-	//mu sync.Mutex
 	sync.Mutex
 	Namespace string
 	Capacity  int64
@@ -53,8 +52,6 @@ func New(namespace string, capacity int64) *Rcache {
 }
 
 func (c *Rcache) Add(key string, value valtype) {
-	//c.mu.Lock()
-	//defer c.mu.Unlock()
 	if c.clen >= c.Capacity {
 		c.deloldest()
 	}
@@ -65,8 +62,6 @@ func (c *Rcache) Add(key string, value valtype) {
 }
 
 func (c *Rcache) Get(key string) (valtype, bool) {
-	//c.mu.Lock()
-	//defer c.mu.Unlock()
 	val, ok := c.Values[key]
 	return val, ok
 }
@@ -81,8 +76,6 @@ func (c *Rcache) deloldest() {
 }
 
 func (c *Rcache) Del(key string) {
-	//c.mu.Lock()
-	//defer c.mu.Unlock()
 	delete(c.Values, key)
 	c.keys = remove(c.keys, key)
 	c.clen--
