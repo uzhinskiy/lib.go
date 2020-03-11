@@ -26,7 +26,7 @@ const (
 type valtype []byte
 
 type Rcache struct {
-	sync.Mutex
+	mx        sync.RWMutex
 	Namespace string
 	Capacity  int64
 	Values    map[string]valtype
@@ -52,21 +52,23 @@ func New(namespace string, capacity int64) *Rcache {
 }
 
 func (c *Rcache) Add(key string, value valtype) {
+	c.mx.Lock()
 	if c.clen >= c.Capacity {
 		c.deloldest()
 	}
-	// TODO: сделать проверку на дубликаты ключей
-
 	_, present := c.Values[key]
 	if !present {
 		c.keys = append(c.keys, key)
 	}
 	c.Values[key] = value
 	c.clen++
+	c.mx.Unlock()
 }
 
 func (c *Rcache) Get(key string) (valtype, bool) {
+	c.mx.RLock()
 	val, ok := c.Values[key]
+	c.mx.RUnlock()
 	return val, ok
 }
 
@@ -80,18 +82,22 @@ func (c *Rcache) deloldest() {
 }
 
 func (c *Rcache) Del(key string) {
+	c.mx.Lock()
 	delete(c.Values, key)
 	c.keys = remove(c.keys, key)
 	c.clen--
+	c.mx.Unlock()
 }
 
 func (c *Rcache) Purge() {
+	c.mx.Lock()
 	c.Capacity = 0
 	c.Namespace = ""
 	c.Values = make(map[string]valtype)
 	c.Index = make([]map[string]string, 0)
 	c.keys = make([]string, 0)
 	c.clen = 0
+	c.mx.Unlock()
 }
 
 func remove(s []string, r string) []string {
