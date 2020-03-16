@@ -39,7 +39,7 @@ type Table struct {
 }
 
 func tnew(capacity uint64) *Table {
-	return &Table{Values: map[string][]byte{}, Index:[]map[string]string{}, keys: []string{}, counter: 0, ccap: capacity}
+	return &Table{Values: map[string][]byte{}, Index: []map[string]string{}, keys: []string{}, counter: 0, ccap: capacity}
 }
 
 func (t *Table) add(key string, value []byte) {
@@ -133,7 +133,7 @@ func (c *TCache) Del(table string, key string) {
 }
 
 func (c *TCache) GetTables() []string {
-	c.RLock()255
+	c.RLock()
 	var t []string
 	for k := range c.Tables {
 		t = append(t, k)
