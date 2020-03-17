@@ -14,6 +14,7 @@
 package tcache
 
 import (
+	"reflect"
 	"sync"
 )
 
@@ -97,7 +98,7 @@ func New(capacity ...uint64) *TCache {
 	return t
 }
 
-func (c *TCache) Add(table string, key string, value []byte) {
+func (c *TCache) Add(table string, key string, value []byte, tags map[string]string) {
 	c.RLock()
 	t, t_exist := c.Tables[table]
 	c.RUnlock()
@@ -105,6 +106,7 @@ func (c *TCache) Add(table string, key string, value []byte) {
 		t = tnew(c.Capacity)
 	}
 	t.add(key, value)
+	t.setindex(tags)
 	c.Lock()
 	c.Tables[table] = t
 	c.Unlock()
@@ -120,6 +122,11 @@ func (c *TCache) Get(table string, key string) ([]byte, bool) {
 	} else {
 		return nil, false
 	}
+}
+
+//TODO:
+func (t *Table) setindex(tags map[string]string) {
+	t.Index = append(t.Index, tags)
 }
 
 func (c *TCache) Del(table string, key string) {
