@@ -14,7 +14,6 @@
 package tcache
 
 import (
-	"reflect"
 	"sync"
 )
 
@@ -85,7 +84,7 @@ func remove(s []string, r string) []string {
 	return s
 }
 
-// func New(capacity ...uint64) *TCache - initialize Cache with capacity
+// func New(capacity ...uint64) *TCache - initialize Cache wtagsith capacity
 // or with default capacity=1000
 func New(capacity ...uint64) *TCache {
 	cc := uint64(CAP)
