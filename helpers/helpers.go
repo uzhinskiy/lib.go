@@ -13,6 +13,8 @@
 
 package helpers
 
+import "net"
+
 /* сортировка вставкой */
 func InsertionSort(inp []rune, n int) []rune {
 	j := 0
@@ -67,4 +69,15 @@ func Float(i int) float64 {
 // Присваиваем INT в *INT
 func IntPtr(i int) *int {
 	return &i
+}
+
+func GetIP(ipport string, xrealip string, xffr string) string {
+	if xrealip != "" {
+		return xrealip
+	} else if xffr != "" {
+		return xffr
+	} else {
+		host, _, _ := net.SplitHostPort(ipport)
+		return host
+	}
 }
