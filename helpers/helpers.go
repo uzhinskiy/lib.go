@@ -61,6 +61,31 @@ func Atoi(s string) int {
 	return int(n)
 }
 
+// конвертация строки в INT
+func Atoi32(s string) int32 {
+	var (
+		n uint64
+		i int
+		v byte
+	)
+	for ; i < len(s); i++ {
+		d := s[i]
+		if '0' <= d && d <= '9' {
+			v = d - '0'
+		} else if 'a' <= d && d <= 'z' {
+			v = d - 'a' + 10
+		} else if 'A' <= d && d <= 'Z' {
+			v = d - 'A' + 10
+		} else {
+			n = 0
+			break
+		}
+		n *= uint64(10)
+		n += uint64(v)
+	}
+	return int32(n)
+}
+
 // конвертация INT во FLOAT
 func Float(i int) float64 {
 	return float64(i)
