@@ -28,7 +28,7 @@ func InsertionSort(inp []rune, n int) []rune {
 }
 
 
-func getMax(v []int) int {
+func GetMaxValueInArray(v []int) int {
 	m:=0	
 	for i, e := range v {
 		if i == 0 || e > m {
@@ -38,7 +38,7 @@ func getMax(v []int) int {
 	return m
 }
 
-func getMin(v []int) int {
+func GetMinValueInArray(v []int) int {
 	m:=0	
 	for i, e := range v {
 		if i == 0 || e < m {
