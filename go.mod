@@ -1,1 +1,1 @@
-module github.com/uzhinskiy/lib.go v0.1.2
+module github.com/uzhinskiy/lib.go
