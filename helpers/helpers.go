@@ -27,6 +27,27 @@ func InsertionSort(inp []rune, n int) []rune {
 	return inp
 }
 
+
+func getMax(v []int) int {
+	m:=0	
+	for i, e := range v {
+		if i == 0 || e > m {
+			m = e
+		}
+	}
+	return m
+}
+
+func getMin(v []int) int {
+	m:=0	
+	for i, e := range v {
+		if i == 0 || e < m {
+			m = e
+		}
+	}
+	return m
+}
+
 // min <= i <= max
 func InBetween(i, min, max int) bool {
 	if (i >= min) && (i <= max) {
