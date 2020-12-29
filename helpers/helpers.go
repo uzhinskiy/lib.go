@@ -14,6 +14,14 @@
 package helpers
 
 import "net"
+import "regexp"
+
+
+// Разделить строку по нескольким разделителям
+func splitWord(word,delimiters string) []string {
+    array := regexp.MustCompile("["+delimiters+"]+").Split(word, -1)
+    return array
+}
 
 /* сортировка вставкой */
 func InsertionSort(inp []rune, n int) []rune {
