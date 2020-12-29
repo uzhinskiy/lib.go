@@ -18,7 +18,7 @@ import "regexp"
 
 
 // Разделить строку по нескольким разделителям
-func splitWord(word,delimiters string) []string {
+func MultiSplit(word,delimiters string) []string {
     array := regexp.MustCompile("["+delimiters+"]+").Split(word, -1)
     return array
 }
