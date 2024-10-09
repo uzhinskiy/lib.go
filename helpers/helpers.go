@@ -13,8 +13,12 @@
 
 package helpers
 
-import "net"
-import "regexp"
+import (
+	"net"
+        "regexp"
+	"strings"
+	"bytes"
+)
 
 
 // Разделить строку по нескольким разделителям
@@ -134,4 +138,11 @@ func GetIP(ipport string, xrealip string, xffr string) string {
 		host, _, _ := net.SplitHostPort(ipport)
 		return host
 	}
+}
+
+// Конвертация strings.Reader в []byte
+func ReatedToByte(stream *strings.Reader) []byte {
+	buf := new(bytes.Buffer)
+	buf.ReadFrom(stream)
+	return buf.Bytes()
 }
